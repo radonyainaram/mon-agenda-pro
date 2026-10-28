@@ -5,7 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCK0VLUwZ1LEA8h81f2tKEjo4p7HSjeU",
+  apiKey: "AIzaSyCK0VLuUwZ1LEA8h81f2tKEjo4p7tHSjeU",
   authDomain: "mon-agenda-telephonique.firebaseapp.com",
   projectId: "mon-agenda-telephonique",
   storageBucket: "mon-agenda-telephonique.firebasestorage.app",
