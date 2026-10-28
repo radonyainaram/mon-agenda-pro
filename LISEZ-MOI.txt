@@ -1,0 +1,39 @@
+MON AGENDA PRO — Installation simple
+======================================
+
+Le site est prêt côté interface. Il utilise Firebase Authentication et Cloud Firestore
+pour connecter un compte et synchroniser les rendez-vous entre les appareils.
+
+AVANT DE L'UTILISER
+-------------------
+1. Dans Firebase Console, ouvrez votre projet "mon-agenda-telephonique".
+2. Authentication > Méthode de connexion : activez "E-mail/Mot de passe".
+3. Firestore Database > Règles : remplacez les règles actuelles par le contenu de
+   firestore.rules, puis cliquez sur Publier.
+   Ces règles isolent les rendez-vous dans users/{UID}/appointments et n'ouvrent pas
+   l'accès public. Chaque utilisateur ne voit que ses propres rendez-vous.
+4. Ouvrez Paramètres du projet > Général > Vos applications > votre application Web.
+   Comparez la configuration affichée avec les valeurs déjà inscrites dans app.js.
+   La configuration a été préremplie à partir de votre capture d'écran ; vérifiez bien
+   apiKey, messagingSenderId et appId dans votre console avant le premier test.
+   Ne mettez jamais de mot de passe ou de clé privée dans ce fichier.
+
+PUBLICATION GRATUITE SUR GITHUB PAGES
+------------------------------------
+1. Créez un dépôt GitHub nommé mon-agenda-pro.
+2. Importez index.html, style.css, app.js et les autres fichiers (pas seulement le ZIP).
+3. Dans Settings > Pages, choisissez le déploiement depuis la branche principale (main)
+   et le dossier /(root). Enregistrez.
+4. Attendez la publication et ouvrez l'URL donnée par GitHub Pages.
+
+RAPPELS
+-------
+Les rappels s'affichent sur le site lorsque la page est ouverte. Ce premier prototype ne
+peut pas afficher de rappels si le site est fermé. Le navigateur doit rester ouvert pour
+voir les rappels. Les fuseaux horaires suivent ceux de l'appareil.
+
+DONNÉES
+-------
+Les rendez-vous sont synchronisés en ligne. N'enregistrez pas de données réelles de clients
+avant d'avoir publié les règles de sécurité et vérifié l'accès avec votre compte.
+La collection de test "rendezvous/test1" créée manuellement n'est pas utilisée par ce site.

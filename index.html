@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17352d">
+  <title>Mon Agenda Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">✓</div>
+    <div class="brand-text"><strong>Mon Agenda Pro</strong><span>Mes rendez-vous téléphoniques</span></div>
+    <button id="logoutBtn" class="btn btn-ghost hidden">Déconnexion</button>
+  </header>
+
+  <main class="container">
+    <section id="authPanel" class="auth-card">
+      <div class="eyebrow">VOTRE ESPACE PERSONNEL</div>
+      <h1>Bienvenue dans votre agenda</h1>
+      <p class="muted">Connectez-vous pour retrouver vos rendez-vous sur vos appareils.</p>
+      <form id="authForm">
+        <label for="email">Adresse e-mail</label>
+        <input id="email" type="email" autocomplete="username" required placeholder="vous@exemple.com">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" autocomplete="current-password" minlength="6" required placeholder="6 caractères minimum">
+        <div class="auth-actions">
+          <button class="btn btn-primary" type="submit" id="loginBtn">Se connecter</button>
+          <button class="btn btn-outline" type="button" id="signupBtn">Créer un compte</button>
+        </div>
+      </form>
+      <p id="authMessage" class="message" role="status"></p>
+      <p class="small muted">Vos rendez-vous sont privés selon les règles Firestore que vous configurerez à l'étape d'installation.</p>
+    </section>
+
+    <section id="appPanel" class="hidden">
+      <div class="welcome-row">
+        <div><div class="eyebrow">VOTRE JOURNÉE, EN UN COUP D'ŒIL</div><h1>Mon agenda</h1><p id="todayLabel" class="muted"></p></div>
+        <button id="addBtn" class="btn btn-primary">＋ Nouveau rendez-vous</button>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card"><span>À venir aujourd'hui</span><strong id="todayCount">0</strong></article>
+        <article class="stat-card"><span>À confirmer</span><strong id="pendingCount">0</strong></article>
+        <article class="stat-card"><span>Terminés</span><strong id="doneCount">0</strong></article>
+      </div>
+
+      <section class="panel">
+        <div class="toolbar">
+          <div class="tabs" role="group" aria-label="Filtrer les rendez-vous">
+            <button class="tab active" data-filter="all">Tous</button>
+            <button class="tab" data-filter="today">Aujourd'hui</button>
+            <button class="tab" data-filter="upcoming">À venir</button>
+            <button class="tab" data-filter="done">Terminés</button>
+          </div>
+          <input id="searchInput" class="search" type="search" placeholder="Rechercher un client…">
+        </div>
+        <div id="reminderBanner" class="reminder hidden" role="status"></div>
+        <div id="appointmentsList" class="appointments-list"></div>
+        <div id="emptyState" class="empty-state hidden"><div class="empty-icon">☏</div><h3>Aucun rendez-vous ici</h3><p>Ajoutez votre premier appel pour commencer.</p></div>
+      </section>
+      <p id="appMessage" class="message" role="status"></p>
+      <p class="small muted privacy-note">Conseil : évitez d'inscrire des informations sensibles dans les notes. Déconnectez-vous sur un appareil partagé.</p>
+    </section>
+  </main>
+
+  <dialog id="appointmentDialog">
+    <form id="appointmentForm" class="appointment-form">
+      <div class="dialog-head"><div><div class="eyebrow">NOUVEL APPEL</div><h2 id="dialogTitle">Ajouter un rendez-vous</h2></div><button type="button" id="closeDialog" class="icon-btn" aria-label="Fermer">×</button></div>
+      <input id="appointmentId" type="hidden">
+      <div class="form-grid">
+        <div class="field full"><label for="clientName">Nom du client *</label><input id="clientName" required maxlength="100" placeholder="Ex. Mme Dupont"></div>
+        <div class="field"><label for="phone">Téléphone</label><input id="phone" type="tel" maxlength="40" placeholder="+33…"></div>
+        <div class="field"><label for="status">Statut</label><select id="status"><option>À appeler</option><option>Confirmé</option><option>Terminé</option><option>À rappeler</option><option>Annulé</option><option>Absent</option></select></div>
+        <div class="field"><label for="date">Date *</label><input id="date" type="date" required></div>
+        <div class="field"><label for="time">Heure *</label><input id="time" type="time" required></div>
+        <div class="field"><label for="duration">Durée (minutes)</label><select id="duration"><option>15</option><option>30</option><option>45</option><option>60</option><option>90</option></select></div>
+        <div class="field"><label for="reminder">Rappel avant l'appel</label><select id="reminder"><option value="0">Aucun</option><option value="5">5 minutes</option><option value="10" selected>10 minutes</option><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">1 heure</option></select></div>
+        <div class="field full"><label for="notes">Notes (facultatif)</label><textarea id="notes" rows="3" maxlength="1000" placeholder="Objet de l'appel, suivi à effectuer…"></textarea></div>
+      </div>
+      <p id="formMessage" class="message" role="status"></p>
+      <div class="dialog-actions"><button type="button" id="cancelDialog" class="btn btn-outline">Annuler</button><button type="submit" class="btn btn-primary">Enregistrer</button></div>
+    </form>
+  </dialog>
+  <footer>Mon Agenda Pro · Synchronisation en ligne avec Firebase</footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

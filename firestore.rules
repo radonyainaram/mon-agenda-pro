@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Chaque utilisateur ne peut lire et modifier que ses propres rendez-vous.
+    match /users/{userId}/appointments/{appointmentId} {
+      allow read, create, update, delete: if request.auth != null
+        && request.auth.uid == userId;
+    }
+    // Les autres chemins, dont la collection de test initiale, restent fermés.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
